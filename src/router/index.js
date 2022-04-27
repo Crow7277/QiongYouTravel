@@ -1,27 +1,52 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+import Home from '../views/Home/Home.vue';
+import Layout from '../views/Layout.vue';
 
-Vue.use(VueRouter)
+// 异步组件
+const News = () => import('@/views/News/News.vue');
+const Travel = () => import('@/views/Travel/Travel.vue');
+const About = () => import('@/views/About/About.vue');
+const Login = () => import('@/views/Login/Login.vue');
+
+Vue.use(VueRouter);
 
 const routes = [
-  {
-    path: '/',
-    name: 'home',
-    component: HomeView
-  },
-  {
-    path: '/about',
-    name: 'about',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
-  }
-]
+    {
+        path: '',
+        component: Layout,
+        children: [
+            {
+                path: '/',
+                name: 'Home',
+                component: Home,
+            },
+            {
+                path: '/travel',
+                name: 'Travel',
+                component: Travel,
+            },
+            {
+                path: '/about',
+                name: 'About',
+                component: About,
+            },
+            {
+                path: '/news',
+                name: 'News',
+                component: News,
+            },
+        ],
+    },
+    {
+        path: '/login',
+        name: 'Login',
+        component: Login,
+    },
+];
 
 const router = new VueRouter({
-  routes
-})
+    routes,
+});
 
-export default router
+export default router;
