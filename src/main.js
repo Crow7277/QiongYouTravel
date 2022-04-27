@@ -4,6 +4,7 @@ import router from './router';
 import store from './store';
 import './plugins/element.js';
 import '@/assets/css/reset.css';
+import '@/router/NavigationGuards'; // 执行路由拦截
 
 Vue.config.productionTip = false;
 

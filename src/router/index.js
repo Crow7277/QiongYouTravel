@@ -20,21 +20,34 @@ const routes = [
                 path: '/',
                 name: 'Home',
                 component: Home,
+                // 路由元信息
+                meta: {
+                    isLogin: false,
+                },
             },
             {
                 path: '/travel',
                 name: 'Travel',
                 component: Travel,
+                meta: {
+                    isLogin: true,
+                },
             },
             {
                 path: '/about',
                 name: 'About',
                 component: About,
+                meta: {
+                    isLogin: true,
+                },
             },
             {
                 path: '/news',
                 name: 'News',
                 component: News,
+                meta: {
+                    isLogin: true,
+                },
             },
         ],
     },
@@ -44,6 +57,11 @@ const routes = [
         component: Login,
     },
 ];
+
+const originalPush = VueRouter.prototype.push;
+VueRouter.prototype.push = function push(location) {
+    return originalPush.call(this, location).catch(err => err);
+};
 
 const router = new VueRouter({
     routes,
