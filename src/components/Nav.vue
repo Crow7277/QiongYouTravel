@@ -18,7 +18,7 @@
 
             <!-- 登录按钮 -->
             <div class="nav-right">
-                <el-button>登录</el-button>
+                <el-button @click="toLogin">登录</el-button>
             </div>
         </el-menu>
     </div>
@@ -42,6 +42,9 @@ export default {
     methods: {
         handleSelect(key) {
             // localStorage.setItem('index', key);
+        },
+        toLogin() {
+            this.$router.push('/login');
         },
     },
 };
