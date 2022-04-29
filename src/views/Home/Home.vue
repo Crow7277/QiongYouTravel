@@ -23,7 +23,7 @@ export default {
         async getBanner() {
             try {
                 let res = await getBanner();
-                console.log(res);
+                // console.log(res);
                 let banner = res.banner;
                 this.banner = banner.map(item => {
                     return item.img.replace(

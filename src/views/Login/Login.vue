@@ -1,14 +1,21 @@
 <template>
     <div>
-        <h2 class="title">登录界面</h2>
+        <h2 class="title">登录页面</h2>
+        <!-- 
+        model	表单数据对象 
+        status-icon	是否在输入框中显示校验结果反馈图标
+        ref  dom元素
+        prop	表单域 model 字段，在使用 validate、resetFields 方法的情况下，该属性是必填的
+        rules	表单验证规则 给整个表单添加
+     -->
         <div class="login">
             <el-form
                 :model="loginForm"
                 status-icon
                 :rules="rules"
-                ref="loginForm"
+                ref="ruleForm"
                 label-width="100px"
-                class="demo-loginForm"
+                class="demo-ruleForm"
             >
                 <el-form-item label="用户名" prop="username">
                     <el-input
@@ -17,16 +24,17 @@
                         autocomplete="off"
                     ></el-input>
                 </el-form-item>
-                <el-form-item label="密码" prop="password">
+                <el-form-item label="密 码" prop="password">
                     <el-input
                         type="password"
                         v-model="loginForm.password"
                         autocomplete="off"
                     ></el-input>
                 </el-form-item>
+
                 <el-form-item>
-                    <el-button type="primary" @click="submitForm('loginForm')">提交</el-button>
-                    <el-button @click="resetForm('loginForm')">重置</el-button>
+                    <el-button type="primary" @click="submitForm('ruleForm')">提交</el-button>
+                    <el-button @click="resetForm('ruleForm')">重置</el-button>
                 </el-form-item>
             </el-form>
         </div>
@@ -35,7 +43,6 @@
 
 <script>
 export default {
-    name: 'Login',
     data() {
         var validateUsername = (rule, value, callback) => {
             if (value === '') {
@@ -63,12 +70,22 @@ export default {
         };
     },
     methods: {
+        /**
+         * 登录，提交表单
+         */
         submitForm(formName) {
             this.$refs[formName].validate(valid => {
                 if (valid) {
-                    alert('submit!');
+                    // console.log("验证成功!",this.loginForm);
+                    // 去登录
+                    this.$store.dispatch('Login/Login', {
+                        user: this.loginForm.username,
+                        pwd: this.loginForm.password,
+                    });
+                    // 跳转到首页
+                    this.$router.push('/');
                 } else {
-                    console.log('error submit!!');
+                    console.log('验证失败!!');
                     return false;
                 }
             });
@@ -86,10 +103,10 @@ export default {
     margin-top: 50px;
 }
 .login {
-    width: 500px;
+    width: 400px;
     height: 200px;
     margin: 20px auto;
-    box-shadow: 0 0 5px rgba(80, 71, 71, 0.2);
     padding: 30px;
+    box-shadow: 0 0 5px 5px rgba(80, 71, 71, 0.2);
 }
 </style>

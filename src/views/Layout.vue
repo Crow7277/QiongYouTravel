@@ -1,16 +1,22 @@
 <template>
     <div>
-        <Nav></Nav>
-        <router-view></router-view>
+        <!-- 导航 -->
+        <Nav />
+
+        <!-- 路由出口 -->
+        <router-view />
     </div>
 </template>
 
 <script>
 import Nav from '@/components/Nav.vue';
 export default {
-    name: 'Layout',
-    components: { Nav },
+    components: {
+        Nav,
+    },
+    created() {},
+    methods: {},
 };
 </script>
 
-<style></style>
+<style lang="less" scoped></style>

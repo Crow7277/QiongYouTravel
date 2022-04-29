@@ -9,21 +9,20 @@ import base from './base';
  * 获取轮播图
  */
 export const getBanner = () => ajax.get(base.host + base.bannerUrl);
+/**
+     登录
+  * params={user:'',pwd:''}
+  */
+export const toLogin = params =>
+    ajax.get(base.login, {
+        params,
+    });
 
-// /**
-//     登录
-//  * params={user:'',pwd:''}
-//  */
-// export const toLogin = params =>
-//     ajax.get(base.login, {
-//         params,
-//     });
-
-// /**
-//  *
-//  * 获取用户信息
-//  */
-// export const getUserInfo = () => elseAjax.post(base.getuser);
+/**
+ *
+ * 获取用户信息
+ */
+export const getUserInfo = () => elseAjax.post(base.getuser);
 
 // /**
 //  * 获取蓝莓数据
