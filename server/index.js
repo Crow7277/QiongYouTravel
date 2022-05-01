@@ -17,6 +17,7 @@ app.get('/', (req, res) => {
 
 // 监听登录接口
 app.get('/login', (req, res) => {
+    
     let user = req.query.user;
     let pwd = req.query.pwd;
     // 省略了.....查询数据库
